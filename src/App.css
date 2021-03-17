@@ -1,0 +1,93 @@
+.App-header {
+  background-color:  rgba(14, 24, 26, 0.8);
+}
+
+.App {
+  background-color:  rgba(14, 24, 26, 0.8);
+}
+
+.Title {
+  color: rgb(1, 233, 250)
+}
+
+strong {
+  color: rgb(251, 253, 117)
+}
+
+.Head {
+  text-align: center;
+}
+
+.Status {
+  text-align: left;
+}
+
+.Logout {
+  top: 0px;
+  right: 0px;
+  position: fixed;
+}
+
+.Log {
+  font-family: 'DM Serif Display', serif;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  background-color: rgba(14, 24, 26, 0.8);
+}
+
+.Login {
+  text-align: center;
+
+}
+
+.Register{
+  text-align: center;
+}
+
+.DropMenu {
+  font-family: 'DM Serif Display', serif;
+  border: none;
+  width: 300px;
+  float: right;
+  margin-right: 30px;
+  display: grid;
+  text-align: left;
+  position: relative;
+}
+
+.chatButton {
+  float: right;
+  margin-right: 70px;
+  
+}
+
+.CountMarkers {
+  background-color:rgb(1, 233, 250);
+}
+
+.MyMarker {
+  height: 30px;
+  width: 30px;
+}
+
+.End {
+  font-family: 'DM Serif Display', serif;
+  font-size: 30px;
+  text-align: center;
+  left: 450px;
+  background-color: rgba(14, 24, 26, 0.8);
+}
+
+li {
+  list-style-type: none;
+  justify-content: space-around;
+}
+
+.Foot, img {
+  text-align: center;
+  height: 50px;
+  width: 50px;
+}
+
+
