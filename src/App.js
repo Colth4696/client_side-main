@@ -4,6 +4,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Home from './Home'
 import Login from './components/registrations/Login'
 import Signup from './components/registrations/Signup'
+import Background from './brick-wall-painted-in-white.jpg';
 
 class App extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ handleLogout = () => {
   }
 render() {
     return (
-      <div>
+      <div className="App">
         <BrowserRouter>
           <Switch>
             <Route 

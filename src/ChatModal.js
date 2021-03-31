@@ -6,7 +6,9 @@ import ChatroomsList from './ChatroomsList'
 const ModalChat = (props) => {
   const [currentChatroom, setCurrentChatroom] = React.useState();
   const [open, setOpen] = React.useState(false);
-
+  const toggle_open = () => {
+    setOpen(!open);
+  }
 
   const initializeChat = () => {
     const chatroom  = {
@@ -27,15 +29,14 @@ const ModalChat = (props) => {
 
   return (
     <div className="chatButton">
-    <Button onClick={initializeChat}>
+    <button onClick={initializeChat}>
       <Icon name='desktop' />
       Start Chat
-    </Button>
-      {open && <div style={{backgroundColor: "pink"}}><ChatroomsList user_id={props.volunteer && props.volunteer.user_id} chatroom={currentChatroom}/></div>}
-    <Button onCloseClick={setOpen}>
+    </button>
+      {open && <div className="ChatBackground"><ChatroomsList user_id={props.volunteer && props.volunteer.user_id} chatroom={currentChatroom}/></div>}
+    <button onClick={toggle_open}>
       Close
-    </Button>
-      {!open}
+    </button>
      </div>
   )
 }

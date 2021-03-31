@@ -8,23 +8,25 @@ class Counter extends React.Component {
     this.state = {
       requests: [],
   }
-};
+  }
 
 componentDidMount() {
  axios.get("http://localhost:3003/requests")
-  .then(response => {
-      if (response.data){
-    console.log(response.data)
-    this.setState({ requests: response.data.length});
-  }})
-  }
+  .then(res => {
+    console.log(res.data)
+    const task = res.data;
+    const taskSize = res.data.length;
+    this.setState({ task, taskSize });
+  })
+}
+      
 
   render() {
     return (
-      <div>
-          <h1>Available Tasks: {this.state.requests} </h1>
+      <div className="Counter">
+          <h1>Available Tasks: {this.state.requests.taskSize} </h1>
       </div>
-    )
+    );
   }
 }
 

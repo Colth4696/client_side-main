@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import Header from '../../Header';
+import Footer from '../../Footer';
+import Houses from '../../576140.jpg';
 
 class Signup extends Component {
   constructor(props) {
@@ -62,7 +65,8 @@ handleErrors = () => {
 render() {
     const {first_name, last_name, email, password, password_confirmation, image} = this.state
 return (
-      <div>
+      <div className="LoginPage" style={{backgroundImage: `url(${Houses})`}}>
+        <Header />
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
         <input
@@ -107,16 +111,21 @@ return (
             value={image}
             onChange={this.onImageChange} 
           />
-        
+          <br/>
+          <div className="SignBtn">
           <button placeholder="submit" type="submit">
             Sign Up
           </button>
+          </div>
       
         </form>
         <div>
           {
             this.state.errors ? this.handleErrors() : null
           }
+          <div className="Bottom">
+            <Footer />
+          </div>
         </div>
       </div>
     );

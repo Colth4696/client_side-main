@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios'
-import {Link} from 'react-router-dom'
+import axios from 'axios';
+import {Link} from 'react-router-dom';
+import Houses from '../../576140.jpg'
+import Header from '../../Header';
+import Footer from '../../Footer';
 
 class Login extends Component {
   constructor(props) {
@@ -60,7 +63,8 @@ handleErrors = () => {
 render() {
     const {email, password} = this.state
 return (
-      <div>
+      <div className="LoginPage" style={{backgroundImage: `url(${Houses})`}}>
+        <Header />
         <h1>Log In</h1>
         <form onSubmit={this.handleSubmit}>
           <input
@@ -70,6 +74,7 @@ return (
             value={email}
             onChange={this.handleChange}
           />
+          <br/>
           <input
             placeholder="password"
             type="password"
@@ -77,9 +82,12 @@ return (
             value={password}
             onChange={this.handleChange}
           />
+          <br/>
+          <div className="SignBtn">
           <button placeholder="submit" type="submit">
             Log In
           </button>
+          </div>
           <div>
             or <Link to='/signup'>sign up</Link>
           </div>
@@ -89,6 +97,9 @@ return (
           {
             this.state.errors ? this.handleErrors() : null
           }
+          <div className="Bottom">
+            <Footer />
+          </div>
         </div>
       </div>
     );

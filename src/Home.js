@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 import Header from './Header'
-import Dashboard from './components/registrations/Dashboard'
+import Dashboard from './components/registrations/Dashboard';
+import Houses from './576140.jpg';
+import Footer from './Footer';
 
 class Home extends Component {
   constructor(props){
@@ -19,8 +21,8 @@ class Home extends Component {
   }
   render(){
 return (
-    <div>
-   <div>
+    <div className="HomePage">
+   <div className="HomeStatus">
        <Header/>
        <br></br>
        { 
@@ -30,15 +32,26 @@ return (
       }
    </div>
    
-    <div>
-      <Link to='/login'>Log In</Link>
+    <div className="Landing" style={{backgroundImage: `url(${Houses})`}}>
+      {
+        !this.props.loggedInStatus ?
+      <Link to='/login'>Log In</Link> :
+      null
+      }
     <br></br>
-    <Link to='/signup'>Sign Up</Link>
+      {
+        !this.props.loggedInStatus ?
+    <Link to='/signup'>Sign Up</Link> :
+    null
+      }
     {
     this.props.loggedInStatus ?      
     <Dashboard user={this.props.user}/>: 
     null
     }
+    <div className="Bottom">
+    <Footer />
+    </div>
     </div>
     </div>
   );

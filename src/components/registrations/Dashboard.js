@@ -15,7 +15,6 @@ return (
 <AccordionMenu requests={requests} />
 <MyMapComponent requests={requests} setRequests={setRequests} user={props.user}   />
 <Counter requests={requests}  />
-<Footer />
 </div>
 
 );
