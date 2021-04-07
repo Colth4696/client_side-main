@@ -1,0 +1,23 @@
+/* a {
+    color: #3d464d;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
+    }
+    a:hover, a:focus {
+    color: #267dc0;
+    }
+    h1 {
+    font-size: 72px;
+    font-size: 4rem;
+    font-weight: 100;
+    margin-bottom: .5em;
+    color: #267dc0;
+    }
+    .subheader {
+    font-weight: 300;
+    margin-bottom: 1.5em;
+    }
+    .hint {
+    color: #ccc;
+    margin: 2em 0;
+    } */

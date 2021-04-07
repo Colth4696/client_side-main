@@ -39,7 +39,7 @@ class VolunteerButton extends Component {
     
     
     render(){
-        return <button onClick={this.addVolunteer, this.handleSubmit}>Volunteer: {this.state.user_reqeust}</button>
+        return <button onClick={this.addVolunteer, this.handleSubmit}>Volunteer: {this.state.user_request}</button>
     }
 }
 

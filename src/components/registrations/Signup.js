@@ -123,9 +123,6 @@ return (
           {
             this.state.errors ? this.handleErrors() : null
           }
-          <div className="Bottom">
-            <Footer />
-          </div>
         </div>
       </div>
     );

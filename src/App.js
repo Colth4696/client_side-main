@@ -4,8 +4,8 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Home from './Home'
 import Login from './components/registrations/Login'
 import Signup from './components/registrations/Signup'
-import Background from './brick-wall-painted-in-white.jpg';
-
+import Houses from './576140.jpg'
+import Footer from './Footer'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +45,8 @@ handleLogout = () => {
   }
 render() {
     return (
-      <div className="App">
+      <div className="App" style={{backgroundImage: `url(${Houses})`}}>
+
         <BrowserRouter>
           <Switch>
             <Route 
@@ -68,7 +69,11 @@ render() {
             />
           </Switch>
         </BrowserRouter>
+        <div className="Bottom">
+        <Footer />
       </div>
+      </div>
+      
     );
   }
 }

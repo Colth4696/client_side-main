@@ -20,7 +20,6 @@ React.useEffect(() => {
    const volunterList = response.data.volunteers;
    let hasVolunteered = false;
    const requestVolunteers = [];
-   console.log(volunterList.length, volunterList);
    volunterList.forEach(rv => {
      if (rv.request_id === props.request.id) {
        if (rv.user_id === props.user.id) {
@@ -87,6 +86,9 @@ React.useEffect(() => {
 <h1>{props.request.title}</h1>
 <h3>{props.request.description}</h3>
 {!chat && !hasMaxVolunteers ? <button onClick={makeVolunteer}>Volunteer</button>: ''}
+<div>
+{volunteer && <FulfilledButton request={props.request} volunteer={volunteer}/>}
+</div>
 </div>
 </InfoWindow>}
 </Marker>

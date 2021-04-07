@@ -49,9 +49,6 @@ return (
     <Dashboard user={this.props.user}/>: 
     null
     }
-    <div className="Bottom">
-    <Footer />
-    </div>
     </div>
     </div>
   );

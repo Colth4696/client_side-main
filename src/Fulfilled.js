@@ -18,49 +18,53 @@ import React, { Component }from "react";
 // export default FulfilledButton;
 
 class FulfilledButton extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            fulfilled: false
-        };
-    }
-
-    handleChange = (event) => {
-        const {value} = event.target
-        this.setState({
-            value 
-        })
+    constructor(){
+        super()
+         this.state = {
+          status: [],
+          fulfilled: false 
     };
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        const {fulfilled} = this.state
-        let fulfill = {
-            fulfilled: fulfilled
-        }
-
-        axios.post("http://localhost:3003/requests.fulfilled", {fulfill}, 
-        { withCredentials: true })
-        .then(response => {
-            this.props.requests(response.data)
-        })
-        .catch(error => {
-            console.log("requests error", error)
-        });
-        event.preventDefault();
+    this.toggleFulfilled=this.toggleFulfilled.bind(this)
     }
 
+    toggleFulfilled = () => 
+    {
+        if (this.state.fulfilled=false){
+            this.setState = ({
+              fulfilled: false
+            });
+        }
+        else{
+           this.setState = ({
+              fulfilled: true
+        })
+    }
+  
+     handleSubmit = (event) => {
+    event.preventDefault()
+    const {fulfilled, volunteer_id, request_id} = this.state
+    let status = {
+      volunteer_id: volunteer_id,
+      request_id: request_id,
+      fulfilled: fulfilled
+    }
+        axios.post("http://localhost:3003/request_statuses", {status}, {withCredentials: true})
+        .then(response => {
+            if (response.data.status === 'created') {
+            this.props.status(response.data)
+            this.redirect('/')            
+        }
+    })        
+        .catch(error => {
+            console.log("request error", error);
+        });
+        event.preventDefault();
+    };
+}
+    
     render(){
-        return(
-            <div className="fulfilledbtn">
-                <input 
-                    type="checkbox"
-                    checked={this.handleChange}
-                    onChange={this.handleSubmit}>
-                        FulFilled
-                    </input>
-            </div>
-        )
+        return <button onClick={this.toggleFulfilled, this.handleSubmit}>Fulfill Request{this.state.status}</button>
     }
 }
 

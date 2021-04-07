@@ -17,7 +17,7 @@ class Logout extends Component {
     }
     render(){
   return (
-      <div>
+    <div className="LoginPage" style={{backgroundImage: `url(${Houses})`}}> 
          { 
           this.props.loggedInStatus ? 
           <Link to='/logout' onClick={this.handleClick}>Log Out</Link> : 

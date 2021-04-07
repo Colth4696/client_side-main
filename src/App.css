@@ -29,7 +29,9 @@
   font-family: 'DM Serif Display', serif;
   text-align: center;
   object-fit: fill;
-  height: 750px;
+  background-repeat: no-repeat;
+  height: 100%;
+  min-height: 550px;
 }
 
 .Log {
@@ -115,8 +117,9 @@ li {
 }
 
 .Bottom {
-  position: relative;
-  margin-top: 565px;
+  position: fixed;
+  width: 100%;
+  margin-bottom: 0%;
 }
 
 
