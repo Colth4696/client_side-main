@@ -22,7 +22,7 @@ function RequestList(props){
             </button>
         </div>
         <div className="RequestList">
-            {requests && requests.map((request, index) => {
+            {requests && this.state.requests.map((request, index) => {
                 return(
                     <div className="task" key={index}>
                         <h3>Request {index + 1}</h3>

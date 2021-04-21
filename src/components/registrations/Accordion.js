@@ -16,10 +16,6 @@ const AccordionMenu = (props) => {
             <RequestForm />
           </AccordionItem>
 
-          <AccordionItem title="Complete Tasks ">
-            <RequestList requests={requests} setRequests={setRequests} user={props.user}/>
-          </AccordionItem>
-
         </Accordion>
       </div>
     );

@@ -10,7 +10,7 @@ import FulfilledButton from "./Fulfilled"
 const MyMarker = (props) => {
 const [flag, setFlag] = React.useState(false);
 const [chat, setChat] = React.useState(false);
-const [volunteer, setVolunteer] = React.useState(false);
+const [volunteer, setVolunteer] = React.useState();
 const [hasMaxVolunteers, setHasMaxVolunteers] = React.useState();
 const [loadingState, setLoadingState] = React.useState('loading');
 
@@ -24,6 +24,7 @@ React.useEffect(() => {
      if (rv.request_id === props.request.id) {
        if (rv.user_id === props.user.id) {
          hasVolunteered = true;
+         setVolunteer(rv);
        } else {
          requestVolunteers.push(rv);
        }

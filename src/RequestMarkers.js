@@ -14,7 +14,8 @@ componentDidMount() {
  axios.get("http://localhost:3003/requests")
   .then(response => {
     console.log(response.data)
-    this.setState({ requests: response.data.requests});
+    let currentRequests = response && response.data && response.data.requests.filter(req => !req.fulfilled)
+    this.setState({ requests: currentRequests});
   })
   }
 
