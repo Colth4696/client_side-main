@@ -1,35 +1,43 @@
 import React, { useState } from "react";
 import axios from "axios";
-import FulfilledButton from "./Fulfilled";
+import Republish from "./Republish";
 
 function RequestList(props){
     const[requests, setRequests]= useState();
+    const[fulfilled, setFulfilled]= useState();
+    const[visible, setVisible]= useState(false);
 
     const apiURL = "http://localhost:3003/requests"; 
 
      const fetchData = async () => {
         const response = await axios.get(apiURL)
-
-        setRequests(response.data)
-
+        console.log(response.data)
+        setRequests(response.data.requests)
+        setFulfilled(response.data.fulfilled)
+        
     }
+    React.useEffect(() => {
+        fetchData();
+    }, []) 
 
+    if (fulfilled === true){
+        return(
+           null
+        )
+    }
     return(
         <div className="List">
-        <div className="ListButton">
-            <button onClick={fetchData}>
-                Get My Tasks
-            </button>
-        </div>
         <div className="RequestList">
-            {requests && this.state.requests.map((request, index) => {
+            {requests && requests.map((request, index, fulfilled) => {
                 return(
                     <div className="task" key={index}>
                         <h3>Request {index + 1}</h3>
-                        <h2>{request.title}</h2>
+                        <h3>Owner ID: {request.user_id}</h3>
+                        <h2>{request.title}
                         <div className="FilledButton">
-                            <FulfilledButton  requests={requests} setRequests={setRequests} user={props.user}/>
+                            <Republish  request={request} fulfilled={fulfilled} />
                         </div>
+                        </h2>
                     </div>
 
                 )
@@ -38,4 +46,5 @@ function RequestList(props){
         </div>
     )
 }
+
 export default RequestList;

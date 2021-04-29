@@ -22,52 +22,46 @@ constructor(){
 super()
 this.state = {
 fulfilled: false,
+volunteer: []
 };
 
-this.toggleFulfilled=this.toggleFulfilled.bind(this)
+// this.toggleFulfilled=this.toggleFulfilled.bind(this)
 }
 
-toggleFulfilled = () => {
-const { fulfilled } = this.state;
-this.setState({fulfilled: !fulfilled});
-}
-
-handleSubmit = (event) => {
-this.toggleFulfilled();
-const {fulfilled} = this.state
-const { request, volunteer } = this.props;
-// let status = {
-// volunteer_id: volunteer.id,
-// request_id: request.id,
-// fulfilled: fulfilled
+// toggleFulfilled = () => {
+// const { fulfilled } = this.state;
+// this.setState({fulfilled: !fulfilled});
 // }
 
+handleSubmit = (event) => {
+event.preventDefault()
+const { request } = this.props;
+const { volunteer } = this.state;
+
 console.log(request);
-axios.patch(`http://localhost:3003/requests/${request.id} ${volunteer.id}`, {fulfilled: !fulfilled}, {withCredentials: true})
+axios.patch(`http://localhost:3003/requests/${request.id} ${volunteer.id}`, {fulfilled: true}, {withCredentials: true})
 .then(response => {
 console.log(response);
 if (response.data.status === 200) {
-console.log(response.data);
-// this.props.status(response.data)
-this.redirect('/')
+this.redirect()
 }
 })
 .catch(error => {
 console.log("request error", error);
 });
+event.preventDefault();
+};
+redirect = () => {
+    window.location.reload();
 }
+
 render() {
-if (this.state.fulfilled === true) {
-    return (
-        <button onClick={this.handleSubmit}>Republish</button>
-    )
-}
-else {
+
     return(
-        <button onClick={this.handleSubmit}>Fulfill Request</button>  
+        <button onClick={this.handleSubmit}  fulfilled={this.state.fulfilled}>Fulfill Request</button>  
     )
 }
 }
-}
+
 
 export default FulfilledButton;

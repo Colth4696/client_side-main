@@ -88,7 +88,7 @@ React.useEffect(() => {
 <h3>{props.request.description}</h3>
 {!chat && !hasMaxVolunteers ? <button onClick={makeVolunteer}>Volunteer</button>: ''}
 <div>
-{volunteer && <FulfilledButton request={props.request} volunteer={volunteer}/>}
+{volunteer && <FulfilledButton request={props.request}/>}
 </div>
 </div>
 </InfoWindow>}

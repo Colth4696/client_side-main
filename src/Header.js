@@ -8,6 +8,7 @@ class Header extends Component {
  handleClick = () => {
         <HowTo/>
     }
+    
     render() {
     return (
         <div className="head">

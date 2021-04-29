@@ -25,6 +25,7 @@ this.setState({
 })
 };
 handleSubmit = (event) => {
+event.preventDefault()
 const {title, description, latitude, longitude, category} = this.state
 let request = {
 title: title,
@@ -48,7 +49,7 @@ console.error("request error", error);
 event.preventDefault();
 };
 redirect = () => {
-this.props.history.push('/dashboard')
+window.location.reload();
 }
 onSuggestSelect = (suggest) => {
 if (suggest) {
