@@ -11,13 +11,13 @@ const ModalChat = (props) => {
   }
 
   const initializeChat = () => {
-    const chatroom  = {
+    const chatroom = {
       name: props.request.title,
       request_id: props.request.id,
       volunteer_id: props.volunteer.id,
     }
-      axios.post("http://localhost:3003/chatrooms", {chatroom})
-      .then (response => {
+    axios.post("http://localhost:3003/chatrooms", { chatroom })
+      .then(response => {
         if (response.status === 200) {
           if (!chatroom.messages) chatroom.messages = [];
           setCurrentChatroom(chatroom);
@@ -29,15 +29,15 @@ const ModalChat = (props) => {
 
   return (
     <div className="chatButton">
-    <button onClick={initializeChat}>
-      <Icon name='desktop' />
+      <button onClick={initializeChat}>
+        <Icon name='desktop' />
       Start Chat
     </button>
-      {open && <div className="ChatBackground"><ChatroomsList user_id={props.volunteer && props.volunteer.user_id} chatroom={currentChatroom}/></div>}
-    <button onClick={toggle_open}>
-      Close
+      {open && <div className="ChatBackground"><ChatroomsList user_id={props.volunteer && props.volunteer.user_id} chatroom={currentChatroom} /></div>}
+      <button onClick={toggle_open}>
+        Close
     </button>
-     </div>
+    </div>
   )
 }
 export default ModalChat;

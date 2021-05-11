@@ -26,8 +26,8 @@ class NewMessageForm extends React.Component {
       chatroom_id: chatroom_id,
       user_id: user_id
     }
-    axios.post(`${API_ROOT}/messages`, {message}).then(result => console.log(result))//.config && result.config.data && JSON.parse(result.config.data).message))
-    .catch(error => console.error(`Error: ${error}`));
+    axios.post(`${API_ROOT}/messages`, { message }).then(result => console.log(result))//.config && result.config.data && JSON.parse(result.config.data).message))
+      .catch(error => console.error(`Error: ${error}`));
     this.setState({ body: '' });
   };
 

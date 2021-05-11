@@ -5,13 +5,13 @@ const Cable = ({ chatroom, handleReceivedMessage }) => {
   return (
     <Fragment>
       <ActionCableConsumer
-        key={chatroom.id}  
+        key={chatroom.id}
         channel={{ channel: 'MessagesChannel', chatroom: chatroom.id }}
         onReceived={handleReceivedMessage}
-        onInitialized= {(res) => console.log(res)}
-        onConnected= {(res) => console.log(res)}
-        onDisconnected= {(res) => console.log(res)}
-        onRejected= {(res) => console.log(res)}
+        onInitialized={(res) => console.log(res)}
+        onConnected={(res) => console.log(res)}
+        onDisconnected={(res) => console.log(res)}
+        onRejected={(res) => console.log(res)}
       />
     </Fragment>
   );

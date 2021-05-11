@@ -1,50 +1,56 @@
 import React, { useState } from "react";
 import axios from "axios";
 import Republish from "./Republish";
+import moment from "moment";
+import { withRequests } from "./RequestProvider";
 
-function RequestList(props){
-    const[requests, setRequests]= useState();
-    const[fulfilled, setFulfilled]= useState();
-    const[visible, setVisible]= useState(false);
+function RequestList(props) {
+    const [requests, setRequests] = useState();
+    const [fulfilled, setFulfilled] = useState();
+    const [visible, setVisible] = useState(false);
 
-    const apiURL = "http://localhost:3003/requests"; 
+    const apiURL = "http://localhost:3003/requests";
 
-     const fetchData = async () => {
-        const response = await axios.get(apiURL)
-        console.log(response.data)
-        setRequests(response.data.requests)
-        setFulfilled(response.data.fulfilled)
-        
+    const fetchData = async () => {
+        let currentRequests = [];
+        console.log(props.user);
+        currentRequests = props.requests && props.requests.filter(request => {
+            const allowRepublish = moment(request.updated_at).isBetween(moment().subtract(1, 'days'), moment());
+            return request.user_id === props.user.id && allowRepublish && request.fulfilled;
+        });
+        console.log(currentRequests);
+        setRequests(currentRequests)
     }
+
     React.useEffect(() => {
         fetchData();
-    }, []) 
+    }, [])
 
-    if (fulfilled === true){
-        return(
-           null
-        )
-    }
-    return(
+    return (
         <div className="List">
-        <div className="RequestList">
-            {requests && requests.map((request, index, fulfilled) => {
-                return(
-                    <div className="task" key={index}>
-                        <h3>Request {index + 1}</h3>
-                        <h3>Owner ID: {request.user_id}</h3>
-                        <h2>{request.title}
-                        <div className="FilledButton">
-                            <Republish  request={request} fulfilled={fulfilled} />
+            <div className="RequestList">
+                {requests && requests.length > 0 ? requests.map((request, index) => {
+                    return (
+                        <div className="task" key={index}>
+                            <h3>Request {index + 1}</h3>
+                            <h3>Owner ID: {request.user_id}</h3>
+                            <h2>{request.title}
+                                <div className="FilledButton">
+                                    <Republish request={request} fulfilled={request.fulfilled} />
+                                </div>
+                            </h2>
                         </div>
-                        </h2>
-                    </div>
 
-                )
-            })}
-        </div>
+                    )
+                })
+                    :
+                    <div className="task">
+                        <h3>There are no tasks to re-issue at this time.</h3>
+                    </div>
+                }
+            </div>
         </div>
     )
 }
 
-export default RequestList;
+export default withRequests(RequestList);

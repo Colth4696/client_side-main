@@ -1,16 +1,15 @@
 import axios from 'axios';
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 class VolunteerButton extends Component {
-    constructor(){
+    constructor() {
         super()
-         this.state = {
-          volunteers: 0
-    };
+        this.state = {
+            volunteers: 0
+        };
     }
 
-    addVolunteer = () => 
-    {
+    addVolunteer = () => {
         let newCount = this.state.volunteers + 1;
         this.setState({
             volunteers: newCount
@@ -18,27 +17,27 @@ class VolunteerButton extends Component {
     };
 
     handleSubmit = (event) => {
-    event.preventDefault()
-    const {user_id, request_id} = this.state
-    let user_request = {
-      user_id: user_id,
-      request_id: request_id
-    }
-        axios.post("http://localhost:3003/user_requests", {user_request}, {withCredentials: true})
-        .then(response => {
-            if (response.data.status === 'created') {
-            this.props.user_requests(response.data)
-            this.redirect('/')            
+        event.preventDefault()
+        const { user_id, request_id } = this.state
+        let user_request = {
+            user_id: user_id,
+            request_id: request_id
         }
-    })        
-        .catch(error => {
-            console.log("request error", error);
-        });
+        axios.post("http://localhost:3003/user_requests", { user_request }, { withCredentials: true })
+            .then(response => {
+                if (response.data.status === 'created') {
+                    this.props.user_requests(response.data)
+                    this.redirect('/')
+                }
+            })
+            .catch(error => {
+                console.log("request error", error);
+            });
         event.preventDefault();
     };
-    
-    
-    render(){
+
+
+    render() {
         return <button onClick={this.addVolunteer, this.handleSubmit}>Volunteer: {this.state.user_request}</button>
     }
 }

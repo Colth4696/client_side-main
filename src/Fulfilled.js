@@ -1,66 +1,42 @@
 import axios from "axios";
-import React, { Component }from "react";
-
-// const FulfilledButton = () => {
-// const [isfulfilled, setIsFulfilled] = React.useState(false);
-// const republish = () => {
-// setIsFulfilled(value => !value);
-
-// return (
-// <input
-// type="checkbox"
-// checked={isfulfilled}
-// onChange={republish}
-// />
-// );
-// }
-
-// export default FulfilledButton;
+import React, { Component } from "react";
 
 class FulfilledButton extends Component {
-constructor(){
-super()
-this.state = {
-fulfilled: false,
-volunteer: []
-};
+    constructor(props) {
+        super(props)
+        this.state = {
+            fulfilled: false,
+            volunteer: []
+        };
+    }
 
-// this.toggleFulfilled=this.toggleFulfilled.bind(this)
-}
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const { request } = this.props;
+        const { volunteer } = this.state;
 
-// toggleFulfilled = () => {
-// const { fulfilled } = this.state;
-// this.setState({fulfilled: !fulfilled});
-// }
+        console.log(request);
+        axios.patch(`http://localhost:3003/requests/${request.id} ${volunteer.id}`, { fulfilled: true }, { withCredentials: true })
+            .then(response => {
+                console.log(response);
+                if (response.status === 200) {
+                    // this.redirect()
+                    const updatedRequest = response.data.request;
+                    this.props.fulfillRequest(updatedRequest);
+                }
+            })
+            .catch(error => {
+                console.log("request error", error);
+            });
+        event.preventDefault();
+    };
 
-handleSubmit = (event) => {
-event.preventDefault()
-const { request } = this.props;
-const { volunteer } = this.state;
+    render() {
 
-console.log(request);
-axios.patch(`http://localhost:3003/requests/${request.id} ${volunteer.id}`, {fulfilled: true}, {withCredentials: true})
-.then(response => {
-console.log(response);
-if (response.data.status === 200) {
-this.redirect()
-}
-})
-.catch(error => {
-console.log("request error", error);
-});
-event.preventDefault();
-};
-redirect = () => {
-    window.location.reload();
-}
-
-render() {
-
-    return(
-        <button onClick={this.handleSubmit}  fulfilled={this.state.fulfilled}>Fulfill Request</button>  
-    )
-}
+        return (
+            <button onClick={this.handleSubmit}>Fulfill Request</button>
+        )
+    }
 }
 
 

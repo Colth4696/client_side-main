@@ -4,7 +4,7 @@ import NewMessageForm from './NewMessageForm';
 const MessagesArea = ({
   chatroom: { id, name, messages }, user_id
 }) => {
-  
+
   return (
     <div className="messagesArea">
       <h2>{name}</h2>
@@ -16,13 +16,8 @@ const MessagesArea = ({
 
 export default MessagesArea;
 
-// helpers
-
 const orderedMessages = messages => {
   console.log('messages', messages);
-  // const sortedMessages = messages.sort(
-  //   (a, b) => new Date(a.created_at) - new Date(b.created_at)
-  // );
   return messages.map(message => {
     return <li key={message.id}>{message.body}</li>;
   });

@@ -3,22 +3,21 @@ import MyMapComponent from "../../MapContainer"
 import AccordionMenu from "./Accordion"
 import Counter from "../../Counter"
 import Footer from "../../Footer"
+import RequestLoader from "../../RequestLoader"
 
 
 const Dashboard = (props) => {
-//const [users, setUsers] = React.useState();
-const [requests, setRequests] = React.useState();
-// const RequestContext = React.useContext();
 
-return (
-<div className="Dashboard">
-<AccordionMenu requests={requests} />
-<MyMapComponent requests={requests} setRequests={setRequests} user={props.user}   />
-<Counter requests={requests}  />
-<Footer />
-</div>
-
-);
+    return (
+        <RequestLoader>
+            <div className="Dashboard">
+                <AccordionMenu user={props.user} />
+                <MyMapComponent user={props.user} />
+                <Counter />
+                <Footer />
+            </div>
+        </RequestLoader>
+    );
 }
 
-export default Dashboard; 
+export default Dashboard;

@@ -6,21 +6,21 @@ import Republish from '../../Republish';
 import RequestList from '../../RequestList';
 
 const AccordionMenu = (props) => {
-  const[requests, setRequests]= React.useState();
-    return (
-      <div className="DropMenu">
-        <Accordion atomic={true}>
+  const [requests, setRequests] = React.useState();
+  return (
+    <div className="DropMenu">
+      <Accordion atomic={true}>
 
-          <AccordionItem title="Create a Task ">
-            <RequestForm />
-          </AccordionItem>
+        <AccordionItem title="Create a Task ">
+          <RequestForm />
+        </AccordionItem>
 
-          <AccordionItem title="Completed Tasks ">
-            <RequestList requests={requests} setRequests={setRequests} user={props.user}/>
-          </AccordionItem>
+        <AccordionItem title="Re-Issue Task">
+          <RequestList requests={requests} setRequests={setRequests} user={props.user} />
+        </AccordionItem>
 
-        </Accordion>
-      </div>
-    );
-  }
-export default AccordionMenu
+      </Accordion>
+    </div>
+  );
+}
+export default AccordionMenu;

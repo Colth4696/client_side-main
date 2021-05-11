@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { Component } from "react";
 
 class Republish extends Component {
-    constructor(){
+    constructor() {
         super()
         this.state = {
             fulfilled: true,
@@ -18,25 +18,25 @@ class Republish extends Component {
         const { request } = this.props;
 
         console.log(request);
-        axios.patch(`http://localhost:3003/requests/${request.id}`, {fulfilled: false}, {withCredentials: true})
+        axios.patch(`http://localhost:3003/requests/${request.id}`, { fulfilled: false }, { withCredentials: true })
             .then(response => {
-            console.log(response);
-            if (response.data.status === 200) {
-            this.redirect('/')
-            }
+                console.log(response);
+                if (response.data.status === 200) {
+                    this.redirect('/')
+                }
             })
             .catch(error => {
-            console.log("request error", error);
+                console.log("request error", error);
             });
-            event.preventDefault();
-        }
+        event.preventDefault();
+    }
 
-            render() {
-          
-                return(
-                    <button onClick={this.handleSubmit}>Republish</button>
-                )
-            }
-                }
-        
+    render() {
+
+        return (
+            <button onClick={this.handleSubmit}>Republish</button>
+        )
+    }
+}
+
 export default Republish;

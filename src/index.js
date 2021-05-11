@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import { ActionCableProvider } from 'react-actioncable-provider';
 import './App.css';
 import App from './App';
-import {API_WS_ROOT} from './constants';
+import { API_WS_ROOT } from './constants';
 // This readys a consumer that will connect against /cable on your backend server by default.
 // const actionCable = {}
 // actionCable.cable = ActionCable.createConsumer(API_WS_ROOT);
 ReactDOM.render(
     <ActionCableProvider url={API_WS_ROOT}>
-         <App />
+        <App />
     </ActionCableProvider>,
     document.getElementById('root'));
 

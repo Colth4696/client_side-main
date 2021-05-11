@@ -7,7 +7,7 @@ import Houses from '../../576140.jpg';
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       first_name: '',
       last_name: '',
       email: '',
@@ -15,20 +15,20 @@ class Signup extends Component {
       password_confirmation: '',
       image: null,
       errors: ''
-     };
+    };
   }
-handleChange = (event) => {
-    const {name, value} = event.target
+  handleChange = (event) => {
+    const { name, value } = event.target
     this.setState({
       [name]: value
     })
   };
-onImageChange = event => { 
+  onImageChange = event => {
     this.setState({ image: event.target.files[0] });
   };
-handleSubmit = (event) => {
+  handleSubmit = (event) => {
     event.preventDefault()
-    const {first_name, last_name, email, password, password_confirmation, image } = this.state
+    const { first_name, last_name, email, password, password_confirmation, image } = this.state
     let user = {
       first_name: first_name,
       last_name: last_name,
@@ -37,39 +37,39 @@ handleSubmit = (event) => {
       password_confirmation: password_confirmation,
       image: image
     }
-axios.post('http://localhost:3003/users', {user}, {withCredentials: true})
-    .then(response => {
-      if (response.data.status === 'created') {
-        this.props.handleLogin(response.data)
-        this.redirect()
-      } else {
-        this.setState({
-          errors: response.data.errors
-        })
-      }
-    })
-    .catch(error => console.log('api errors:', error))
+    axios.post('http://localhost:3003/users', { user }, { withCredentials: true })
+      .then(response => {
+        if (response.data.status === 'created') {
+          this.props.handleLogin(response.data)
+          this.redirect()
+        } else {
+          this.setState({
+            errors: response.data.errors
+          })
+        }
+      })
+      .catch(error => console.log('api errors:', error))
   };
-redirect = () => {
+  redirect = () => {
     this.props.history.push('/')
   }
-handleErrors = () => {
+  handleErrors = () => {
     return (
       <div>
         <ul>{this.state.errors.map((error) => {
           return <li key={error}>{error}</li>
-        })}</ul> 
+        })}</ul>
       </div>
     )
   }
-render() {
-    const {first_name, last_name, email, password, password_confirmation, image} = this.state
-return (
-      <div className="LoginPage" style={{backgroundImage: `url(${Houses})`}}>
+  render() {
+    const { first_name, last_name, email, password, password_confirmation, image } = this.state
+    return (
+      <div className="LoginPage" style={{ backgroundImage: `url(${Houses})` }}>
         <Header />
         <h1>Sign Up</h1>
         <form onSubmit={this.handleSubmit}>
-        <input
+          <input
             placeholder="first_name"
             type="text"
             name="first_name"
@@ -90,7 +90,7 @@ return (
             value={email}
             onChange={this.handleChange}
           />
-          <input 
+          <input
             placeholder="password"
             type="password"
             name="password"
@@ -104,20 +104,20 @@ return (
             value={password_confirmation}
             onChange={this.handleChange}
           />
-          <input 
-            type="file" 
-            accept="image/*" 
-            multiple={false} 
+          <input
+            type="file"
+            accept="image/*"
+            multiple={false}
             value={image}
-            onChange={this.onImageChange} 
+            onChange={this.onImageChange}
           />
-          <br/>
+          <br />
           <div className="SignBtn">
-          <button placeholder="submit" type="submit">
-            Sign Up
+            <button placeholder="submit" type="submit">
+              Sign Up
           </button>
           </div>
-      
+
         </form>
         <div>
           {

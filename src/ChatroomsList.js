@@ -49,10 +49,10 @@ class ChatroomList extends React.Component {
     return (
       <div className="chatroomsList">
         {activeChatroom ? (
-           <ActionCableConsumer
+          <ActionCableConsumer
             key={activeChatroom.id}
             channel={{ channel: 'MessagesChannel', chatroom: activeChatroom.id }}
-            onReceived={(res) => {console.log(res); this.handleReceivedMessage(res)}}
+            onReceived={(res) => { console.log(res); this.handleReceivedMessage(res) }}
           />
         ) : null}
         {activeChatroom ? (
