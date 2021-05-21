@@ -91,17 +91,6 @@ class RequestForm extends Component {
 
                     <br />
 
-                    {/* <input
-type="decimal"
-name="longitude"
-placeholder="Longitude"
-value={this.state.longitude}
-onChange={this.handleChange}
-required
-/> */}
-
-                    <br />
-
                     <div>
 
                         <input

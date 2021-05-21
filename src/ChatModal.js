@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React from 'react'
-import { Button, Icon, Modal } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react'
 import ChatroomsList from './ChatroomsList'
 
 const ModalChat = (props) => {

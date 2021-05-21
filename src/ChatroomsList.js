@@ -1,6 +1,5 @@
 import React from 'react';
 import { ActionCableConsumer } from 'react-actioncable-provider';
-import ActionCable from 'actioncable';
 import { API_ROOT } from './constants/index';
 import MessagesArea from './MessagesArea';
 import axios from 'axios';

@@ -37,7 +37,7 @@ const MyMarker = (props) => {
   }, [props.request.id, props.user.id])
 
   const refresh = () => {
-    setFulfilled({}) 
+    setFulfilled({})
   }
 
   const toggle_open = () => {

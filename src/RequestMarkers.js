@@ -12,8 +12,8 @@ const RequestMarkers = (props) => {
   }, [state])
 
   const fulfillRequest = (request) => {
-    const allRequests= state.requests;
-    for (let index=0; index<allRequests.length; index++) {
+    const allRequests = state.requests;
+    for (let index = 0; index < allRequests.length; index++) {
       if (allRequests[index].id === request.id) {
         allRequests[index] = request;
         break;
@@ -25,14 +25,14 @@ const RequestMarkers = (props) => {
   return (
     <div>
       {requests && requests.map(request => {
-        return (<MyMarker position={{ lat:+request.latitude, lng:+request.longitude }}
-          title={request.title} 
+        return (<MyMarker position={{ lat: +request.latitude, lng: +request.longitude }}
+          title={request.title}
           description={request.description}
           request={request}
-          key={request.id} 
+          key={request.id}
           request_id={request.id}
           user={props.user}
-          fulfillRequest={fulfillRequest}/>)
+          fulfillRequest={fulfillRequest} />)
       })
       }
     </div>
