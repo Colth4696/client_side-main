@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Houses from '../../576140.jpg'
 import Header from '../../Header';
-import Footer from '../../Footer';
 
 class Login extends Component {
   constructor(props) {

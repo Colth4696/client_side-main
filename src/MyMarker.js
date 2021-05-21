@@ -8,7 +8,6 @@ import FulfilledButton from "./Fulfilled"
 
 
 const MyMarker = (props) => {
-  const [fulfilled, setFulfilled] = React.useState();
   const [flag, setFlag] = React.useState(false);
   const [chat, setChat] = React.useState(false);
   const [volunteer, setVolunteer] = React.useState();

@@ -1,42 +1,32 @@
 import axios from "axios";
+import { relativeTimeThreshold } from "moment";
 import React, { Component } from "react";
 
-class Republish extends Component {
-    constructor() {
-        super()
-        this.state = {
-            fulfilled: true,
-        };
-    }
+const Republish = (props) => {
 
-    redirect = () => {
-        window.location.reload();
-    }
 
-    handleSubmit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
-        const { request } = this.props;
+        const { request } = props;
 
         console.log(request);
         axios.patch(`http://localhost:3003/requests/${request.id}`, { fulfilled: false }, { withCredentials: true })
             .then(response => {
                 console.log(response);
-                if (response.data.status === 200) {
-                    this.redirect('/')
+                if (response.status === 200) {
+                    const updatedRequest = response.data.request;
+                    props.reissueRequest(updatedRequest);
                 }
             })
             .catch(error => {
                 console.log("request error", error);
             });
-        event.preventDefault();
     }
 
-    render() {
 
         return (
-            <button onClick={this.handleSubmit}>Republish</button>
+            <button onClick={handleSubmit}>Republish</button>
         )
     }
-}
 
 export default Republish;

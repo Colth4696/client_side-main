@@ -2,11 +2,9 @@ import React from 'react';
 import RequestForm from '../../RequestForm';
 import { Accordion, AccordionItem } from 'react-light-accordion';
 import 'react-light-accordion/demo/css/index.css';
-import Republish from '../../Republish';
 import RequestList from '../../RequestList';
 
 const AccordionMenu = (props) => {
-  const [requests, setRequests] = React.useState();
   return (
     <div className="DropMenu">
       <Accordion atomic={true}>
@@ -16,7 +14,7 @@ const AccordionMenu = (props) => {
         </AccordionItem>
 
         <AccordionItem title="Re-Issue Task">
-          <RequestList requests={requests} setRequests={setRequests} user={props.user} />
+          <RequestList user={props.user} fulfillRequest={props.fulfillRequest} request={props.request}/>
         </AccordionItem>
 
       </Accordion>

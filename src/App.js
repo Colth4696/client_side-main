@@ -6,6 +6,7 @@ import Login from './components/registrations/Login'
 import Signup from './components/registrations/Signup'
 import Houses from './576140.jpg'
 import Footer from './Footer'
+
 class App extends Component {
   constructor(props) {
     super(props);

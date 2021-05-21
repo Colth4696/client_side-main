@@ -1,56 +1,62 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Republish from "./Republish";
 import moment from "moment";
-import { withRequests } from "./RequestProvider";
+import { useRequestState } from "./RequestStateProvider";
 
-function RequestList(props) {
-    const [requests, setRequests] = useState();
-    const [fulfilled, setFulfilled] = useState();
-    const [visible, setVisible] = useState(false);
+function RequestList(props){
+    const [state, dispatch] = useRequestState();
+    const[requests, setRequests]= useState();
 
-    const apiURL = "http://localhost:3003/requests";
 
-    const fetchData = async () => {
+     const fetchData = async (allRequests) => {
         let currentRequests = [];
-        console.log(props.user);
-        currentRequests = props.requests && props.requests.filter(request => {
-            const allowRepublish = moment(request.updated_at).isBetween(moment().subtract(1, 'days'), moment());
+        currentRequests = allRequests && allRequests.filter(request => {
+            const allowRepublish = moment(request.updated_at).isBetween(moment().subtract(1,'days'),moment());
             return request.user_id === props.user.id && allowRepublish && request.fulfilled;
         });
-        console.log(currentRequests);
-        setRequests(currentRequests)
+        setRequests(currentRequests)        
     }
 
     React.useEffect(() => {
-        fetchData();
-    }, [])
+        fetchData(state.requests);
+    }, [state]) 
 
-    return (
+    const reissueRequest = (request) => {
+        const allRequests= state.requests;
+        for (let index=0; index<allRequests.length; index++) {
+          if (allRequests[index].id === request.id) {
+            allRequests[index] = request;
+            break;
+          }
+        }
+        dispatch({ type: "UPDATE_REQUESTS", requests: allRequests });
+      }  
+
+    return(
         <div className="List">
-            <div className="RequestList">
-                {requests && requests.length > 0 ? requests.map((request, index) => {
-                    return (
-                        <div className="task" key={index}>
-                            <h3>Request {index + 1}</h3>
-                            <h3>Owner ID: {request.user_id}</h3>
-                            <h2>{request.title}
-                                <div className="FilledButton">
-                                    <Republish request={request} fulfilled={request.fulfilled} />
-                                </div>
-                            </h2>
+        <div className="RequestList">
+            {requests && requests.length > 0 ? requests.map((request, index) => {
+                return(
+                    <div className="task" key={index}>
+                        <h3>Request {index + 1}</h3>
+                        <h3>Owner ID: {request.user_id}</h3>
+                        <h2>{request.title}
+                        <div className="FilledButton">
+                            <Republish  reissueRequest={reissueRequest} request={request} />
                         </div>
-
-                    )
-                })
-                    :
-                    <div className="task">
-                        <h3>There are no tasks to re-issue at this time.</h3>
+                        </h2>
                     </div>
-                }
+
+                )
+            })
+        : 
+            <div className="task">
+                <h3>There are no tasks to re-issue at this time.</h3>
             </div>
+        }
+        </div>
         </div>
     )
 }
 
-export default withRequests(RequestList);
+export default RequestList;
