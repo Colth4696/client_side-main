@@ -32,11 +32,13 @@ const ModalChat = (props) => {
       axios.post("http://localhost:3003/chatrooms", {chatroom})
       .then (response => {
         if (response.status === 200) {
-          console.log(response)
-          let chatroom = response && response.config && response.config.data && JSON.parse(response.config.data).chatroom;
-          if (!chatroom) chatroom = {};
+          //console.log(response)
+          //let chatroom = response && response.config && response.config.data && JSON.parse(response.config.data).chatroom;
+          //if (!chatroom) chatroom = {};
+          const chatroom = response.data.chatroom
           if (!chatroom.messages) chatroom.messages = [];
           setCurrentChatroom(chatroom);
+          console.log({chatroom})
           setOpen(true);
           // dispatch({ type: 'open', size: 'fullscreen' })
         }

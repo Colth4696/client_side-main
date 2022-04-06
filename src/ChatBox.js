@@ -12,6 +12,7 @@ class ChatBox extends Component {
   }
 
   componentDidMount = () => {
+    console.log(this.props.chatroom)
     Cable.subscriptions.create({
       channel: this.props.chatroom.name,
      volunteer_id: this.props.volunteer.id,

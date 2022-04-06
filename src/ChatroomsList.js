@@ -10,7 +10,9 @@ import axios from 'axios';
 class ChatroomList extends React.Component {
   state = {
     chatrooms: [],
-    activeChatroom: this.props.chatroom
+    activeChatroom: this.props.chatroom,
+    messages: [],
+    activeChat: this.props.message
   };
 
   //   componentWillMount = () => {
@@ -36,7 +38,7 @@ class ChatroomList extends React.Component {
         const chatroomList = res.data;
         console.log(chatroomList, this.props)
         const currentRoom = chatroomList.find(room => {
-          return room.name === activeChatroom.id // && room.request_id === activeChatroom.request_id && room.volunteer_id === activeChatroom.volunteer_id
+          return room.name === activeChatroom.id && room.request_id === activeChatroom.request_id && room.volunteer_id === activeChatroom.volunteer_id
         })
         this.setState({ activeChatroom: currentRoom })
       })
@@ -112,7 +114,8 @@ class ChatroomList extends React.Component {
            <ActionCableConsumer
             key={activeChatroom.id}
             // cable={actionCable.cable}
-            channel={{ channel: 'messages_channel', chatroom: activeChatroom.id }}
+             channel={{ channel: 'MessageChannel', room: activeChatroom.id }}
+
             onReceived={(res) => {console.log(res); this.handleReceivedMessage(res)}}
             // onInitialized= {(res) => console.log(res)}
             // onConnected= {(res) => console.log(res)}
